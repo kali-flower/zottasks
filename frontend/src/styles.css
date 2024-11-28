@@ -1,210 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZotTasks</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f7f8fa;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-      border-bottom: 2px solid #ddd;
-    }
-
-    .header h1 {
-      font-size: 28px;
-      color: #333;
-    }
-
-    .header .profile {
-      font-size: 18px;
-      color: #555;
-    }
-
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f8fa;
+    color: #333;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* header styles */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    font-size: 28px;
+  }
+  
+  .header .profile {
+    font-size: 18px;
+    color: #555;
+  }
+  
+  /* dashboard styles */
+  .dashboard {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+  }
+  
+  .sidebar,
+  .content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar h2,
+  .content h2 {
+    font-size: 20px;
+    color: #007bff;
+    margin-bottom: 15px;
+  }
+  
+  .task-list {
+    list-style-type: none;
+  }
+  
+  .task-list li {
+    margin-bottom: 10px;
+    padding: 8px;
+    background-color: #f0f4ff;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* table styles */
+  .content table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .content th,
+  .content td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .content th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .content td {
+    font-size: 14px;
+  }
+  
+  /* add Task section styles */
+  .add-task {
+    margin-top: 30px;
+  }
+  
+  .input-field {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* media queries for responsiveness */
+  @media (max-width: 768px) {
     .dashboard {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 20px;
-      margin-top: 20px;
+      grid-template-columns: 1fr;
     }
-
-    .sidebar,
-    .content {
-      background-color: #ffffff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  
+    .header h1 {
+      font-size: 24px;
     }
-
-    .sidebar h2,
-    .content h2 {
-      font-size: 20px;
-      color: #007bff;
-      margin-bottom: 15px;
-    }
-
-    .task-list li {
-      margin-bottom: 10px;
-      list-style-type: none;
-      padding: 8px;
-      background: #f0f4ff;
-      border-radius: 5px;
+  
+    .header .profile {
       font-size: 16px;
     }
-
-    .content table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .content th,
-    .content td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: center;
-    }
-
-    .content th {
-      background-color: #007bff;
-      color: #fff;
-      font-weight: bold;
-    }
-
-    .content td {
-      font-size: 14px;
-    }
-
-    .add-task {
-      margin-top: 30px;
-    }
-
-    .input-field {
-      padding: 10px;
-      margin: 10px 0;
-      width: 100%;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    @media (max-width: 768px) {
-      .dashboard {
-        grid-template-columns: 1fr;
-      }
-
-      .header h1 {
-        font-size: 24px;
-      }
-
-      .header .profile {
-        font-size: 16px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <!-- Header Section -->
-    <header class="header">
-      <h1>ZotTasks</h1>
-      <div class="profile">Welcome, User!</div>
-    </header>
-
-    <!-- Dashboard Section -->
-    <div class="dashboard">
-      <!-- Sidebar: Daily Overview -->
-      <aside class="sidebar">
-        <h2>Daily Overview</h2>
-        <ul class="task-list">
-          <li>8:00 AM - Math Class</li>
-          <li>10:00 AM - Project Meeting</li>
-          <li>1:00 PM - Submit Assignment</li>
-        </ul>
-      </aside>
-
-      <!-- Main Content: Weekly Schedule -->
-      <main class="content">
-        <h2>Weekly Schedule</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Monday</th>
-              <th>Tuesday</th>
-              <th>Wednesday</th>
-              <th>Thursday</th>
-              <th>Friday</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>8:00 AM</td>
-              <td>Math Class</td>
-              <td></td>
-              <td>Math Class</td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>10:00 AM</td>
-              <td></td>
-              <td>Project Meeting</td>
-              <td></td>
-              <td>Project Meeting</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1:00 PM</td>
-              <td>Assignment Work</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>Submit Assignment</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!-- Add Task Section -->
-        <div class="add-task">
-          <h2>Add New Task</h2>
-          <form>
-            <input type="text" class="input-field" placeholder="Task Name" required>
-            <input type="datetime-local" class="input-field" required>
-            <button type="submit">Add Task</button>
-          </form>
-        </div>
-      </main>
-    </div>
-  </div>
-</body>
-</html>
+  }
